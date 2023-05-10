@@ -1,0 +1,16 @@
+version: '3'
+services:
+  java:
+    build: ./elevator-system
+    container_name: javat
+    ports:
+      - "8080:8080"
+
+  react:
+    build: ./elevator-front
+    container_name: react
+    ports:
+      - "3000:3000"
+    links:
+      - java
+
