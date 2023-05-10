@@ -29,4 +29,6 @@ jeśli na 5 piętrze ktoś wsiadł i wybrał piętro 11 to kolejność pięter b
 * czerwona obwódka przy numerze oznacza że piętro zostało wybrane
 
 ## Uruchomienie aplikacji
-By uruchomić aplikacje należy mieć zainstalowanego dockera
+By uruchomić aplikacje należy mieć zainstalowanego dockera. <br>
+Uruchomienie za pomocą dockera -> należy przejść do folderu z aplikacją - ten folder w którym znajduje się plik docker-compose.yml
+następnie wpisać komende `docker-compose up` i poczekać na uruchomienie, frontend troche długo się buduje
