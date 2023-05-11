@@ -1,7 +1,7 @@
 import React from 'react';
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {createElevator, getElevators, run} from "./ElevatorService";
-import ElevatorContainer, {Elevator} from "./Elevatos";
+import {createElevator, getElevators, runElevator} from "./ElevatorService";
+import ElevatorContainer, {Elevator} from "./Elevator";
 
 function App() {
     const queryClient = useQueryClient()
@@ -16,7 +16,7 @@ function App() {
         addElevatorMutation.mutate()
     }
 
-    const updateElevatorsMutation = useMutation(run)
+    const updateElevatorsMutation = useMutation(runElevator)
 
     const runElevators = (elevatorId: string) => {
         updateElevatorsMutation.mutate(elevatorId)
@@ -35,7 +35,7 @@ function App() {
     if (result.isLoading) {
         return <div>waiting for backend....</div>
     }
-    console.log(result.data)
+
     const elevators: Elevator[] = result.data ? result.data : []
 
     return (

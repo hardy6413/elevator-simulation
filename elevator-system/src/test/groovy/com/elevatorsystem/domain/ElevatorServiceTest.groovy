@@ -2,6 +2,7 @@ package com.elevatorsystem.domain
 
 import com.elevatorsystem.config.ElevatorConfig
 import com.elevatorsystem.domain.Elevator.Elevator
+import com.elevatorsystem.domain.Elevator.ElevatorStatus
 import com.elevatorsystem.domain.Request.ElevatorRequest
 import com.elevatorsystem.domain.Request.ElevatorRequestDto
 import com.elevatorsystem.domain.Request.RequestStatus
@@ -10,7 +11,6 @@ import com.elevatorsystem.repositories.elevator.InMemoryElevatorRepository
 import com.elevatorsystem.repositories.requests.ElevatorRequestRepository
 import com.elevatorsystem.repositories.requests.InMemoryElevatorRequestRepository
 import com.elevatorsystem.utils.ElevatorNotFoundException
-import com.elevatorsystem.utils.ElevatorStatus
 import com.elevatorsystem.utils.RequestedFloorOutOfBoundException
 import spock.lang.Specification
 import spock.lang.Unroll

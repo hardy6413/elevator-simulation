@@ -2,11 +2,11 @@ package com.elevatorsystem.web
 
 import com.elevatorsystem.ElevatorSystemApplication
 import com.elevatorsystem.domain.Elevator.Elevator
+import com.elevatorsystem.domain.Elevator.ElevatorStatus
 import com.elevatorsystem.domain.Elevator.ElevatorResponse
 import com.elevatorsystem.domain.Request.ElevatorRequestDto
 import com.elevatorsystem.repositories.elevator.ElevatorJpaRepository
 import com.elevatorsystem.repositories.requests.ElevatorRequestJpaRepository
-import com.elevatorsystem.utils.ElevatorStatus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate

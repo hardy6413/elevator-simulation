@@ -9,7 +9,6 @@ export interface Elevator {
     requests: ElevatorRequest[]
 }
 
-
 export interface Elevators {
     elevators: Elevator[]
 }
@@ -20,11 +19,6 @@ export interface ElevatorRequest {
     floor: number,
 }
 
-const elevatorContainerStyle: CSS.Properties = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-};
 
 const ElevatorContainer = ({elevators}: Elevators) => {
     return (
@@ -32,10 +26,17 @@ const ElevatorContainer = ({elevators}: Elevators) => {
         <div style={elevatorContainerStyle}>
             {elevators.map(elevator =>
                 <ElevatorComponent key={elevator.id} id={elevator.id} currentFloor={elevator.currentFloor}
-                                   status={elevator.status}  requests={elevator.requests} />
+                                   status={elevator.status} requests={elevator.requests}/>
             )}
         </div>
     )
 };
 
 export default ElevatorContainer;
+
+//css
+const elevatorContainerStyle: CSS.Properties = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+};

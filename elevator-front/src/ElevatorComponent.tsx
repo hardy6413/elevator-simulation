@@ -1,8 +1,57 @@
-import {Elevator} from "./Elevatos";
+import {Elevator} from "./Elevator";
 import CSS from "csstype";
 import {useMutation, useQueryClient} from "react-query";
 import {createRequest} from "./ElevatorService";
 
+const maxFloors = 16;
+
+const ElevatorComponent = ({id, currentFloor, status, requests}: Elevator) => {
+    useQueryClient();
+    const addElevatorMutation = useMutation(createRequest)
+    const currentFloorElementId = `${String(currentFloor)}${id}`
+    const currentFloorElement = document.getElementById(currentFloorElementId)
+
+    if (currentFloorElement) {
+        if (status === 'OPENED') {
+            currentFloorElement.style.borderColor = "green";
+        } else if (status === "WAITING") {
+            currentFloorElement.style.borderColor = "green";
+        }
+        if (status === 'UPWARD' || status === 'DOWNWARD') {
+            setTimeout(() => {
+                currentFloorElement.style.borderColor = "transparent";
+            }, 600)
+        }
+    }
+
+    const chooseFloor = async (elevatorId: string, floor: number) => {
+        const elementId = `${String(floor)}${elevatorId}`
+        const element = document.getElementById(elementId)
+        if (element) {
+            element.style.borderColor = "red";
+        }
+        addElevatorMutation.mutate({elevatorId, floor})
+    }
+
+
+    return (
+        <div style={elevatorStyle}>
+            <div style={floorStyle}>{currentFloor}</div>
+            <div style={numberContainerStyle}>
+                {
+                    Array.from({length: maxFloors}).map((_, index) => (
+                        <p id={`${String(index)}${id}`} key={index} style={numberStyle}
+                           onClick={() => chooseFloor(id, index)}>{index}</p>
+                    ))
+                }
+            </div>
+        </div>
+    )
+};
+
+export default ElevatorComponent;
+
+//css
 const elevatorStyle: CSS.Properties = {
     backgroundColor: 'grey',
     margin: '1rem',
@@ -44,53 +93,3 @@ const numberContainerStyle: CSS.Properties = {
     justifyContent: 'center',
     alignSelf: 'center',
 };
-
-const maxFloors = 16;
-
-const ElevatorComponent = ({id, currentFloor, status, requests}: Elevator) => {
-    useQueryClient();
-    const addElevatorMutation = useMutation(createRequest)
-    console.log("st", status)
-    console.log("fl", currentFloor)
-    const currentFloorElementId = `${String(currentFloor)}${id}`
-    const currentFloorElement = document.getElementById(currentFloorElementId)
-    if (currentFloorElement) {
-        if (status === 'OPENED') {
-            currentFloorElement.style.borderColor = "green";
-        }else if (status === "WAITING"){
-            currentFloorElement.style.borderColor = "green";
-        }
-        if (status=== 'UPWARD' || status === 'DOWNWARD'){
-            setTimeout(() => {
-                currentFloorElement.style.borderColor = "transparent";
-            }, 600)
-
-        }
-    }
-
-    const chooseFloor = async (elevatorId: string, floor: number) => {
-        const elementId = `${String(floor)}${elevatorId}`
-        const element = document.getElementById(elementId)
-        if (element) {
-            element.style.borderColor = "red";
-        }
-        addElevatorMutation.mutate({elevatorId, floor})
-    }
-
-
-    return (
-        <div style={elevatorStyle}>
-            <div style={floorStyle}>{currentFloor}</div>
-            <div style={numberContainerStyle}>
-                {
-                    Array.from({length: maxFloors}).map((_, index) => (
-                        <p id={`${String(index)}${id}`} key={index} style={numberStyle}
-                           onClick={() => chooseFloor(id, index)}>{index}</p>
-                    ))
-                }
-            </div>
-        </div>
-    )
-};
-
-export default ElevatorComponent;
