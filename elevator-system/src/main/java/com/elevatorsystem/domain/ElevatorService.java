@@ -8,7 +8,7 @@ import com.elevatorsystem.domain.Request.RequestStatus;
 import com.elevatorsystem.repositories.elevator.ElevatorRepository;
 import com.elevatorsystem.repositories.requests.ElevatorRequestRepository;
 import com.elevatorsystem.utils.ElevatorNotFoundException;
-import com.elevatorsystem.utils.ElevatorStatus;
+import com.elevatorsystem.domain.Elevator.ElevatorStatus;
 import com.elevatorsystem.utils.RequestedFloorOutOfBoundException;
 
 import java.util.Comparator;
@@ -27,9 +27,6 @@ public class ElevatorService {
         this.elevatorRepository = elevatorRepository;
         this.elevatorRequestRepository = elevatorRequestRepository;
         this.elevatorConfig = elevatorConfig;
-        System.out.println(elevatorConfig.getMinFloor());
-        System.out.println(elevatorConfig.getMaxFloor());
-        System.out.println(elevatorConfig.getTimeout());
     }
 
     public List<Elevator> findAll() {
@@ -47,11 +44,14 @@ public class ElevatorService {
             while (floorsToReach.size() > 0) {
                 var currentFloor = elevator.getCurrentFloor();
                 var request = getNearestFloorRequest(currentFloor, floorsToReach, elevator.getElevatorStatus());
+
                 chooseElevatorDirection(elevator, currentFloor, request); // chose direction and close doors
+
                 var prevStatus = elevator.getElevatorStatus(); // remember direction
 
                 simulateElevatorMove(elevator); //move elevator
                 openDoorsIfOnDesiredFloor(elevator, request); //open doors
+
                 if (floorsToReach.size() > 1) { // close doors and if any request was added in the same direction during moving finish it first(the closes of them)
                     elevator.setElevatorStatus(prevStatus);
                     elevatorRepository.save(elevator);
@@ -63,7 +63,6 @@ public class ElevatorService {
                         .filter(elevatorRequest -> elevatorRequest.getRequestStatus().equals(RequestStatus.PENDING))
                         .sorted(Comparator.comparing(ElevatorRequest::getCreatedAt))
                         .collect(Collectors.toList());
-
             }
             elevator.setElevatorStatus(ElevatorStatus.WAITING);
             elevatorRepository.save(elevator);
@@ -74,9 +73,6 @@ public class ElevatorService {
 
     public void addRequest(ElevatorRequestDto elevatorRequestDto) {
         if (elevatorRequestDto.floor() < this.elevatorConfig.getMinFloor() || elevatorRequestDto.floor() > this.elevatorConfig.getMaxFloor()){
-            System.out.println(elevatorRequestDto.floor());
-            System.out.println(this.elevatorConfig.getMinFloor());
-            System.out.println(this.elevatorConfig.getMaxFloor());
             throw new RequestedFloorOutOfBoundException("Floor is not in range");
         }
 

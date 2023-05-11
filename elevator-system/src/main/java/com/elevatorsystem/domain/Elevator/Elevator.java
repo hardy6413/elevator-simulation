@@ -2,7 +2,6 @@ package com.elevatorsystem.domain.Elevator;
 
 import com.elevatorsystem.domain.Request.ElevatorRequest;
 import com.elevatorsystem.domain.Request.RequestStatus;
-import com.elevatorsystem.utils.ElevatorStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
