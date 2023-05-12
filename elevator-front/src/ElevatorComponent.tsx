@@ -17,11 +17,9 @@ const ElevatorComponent = ({id, currentFloor, status, requests}: Elevator) => {
         } else if (status === "WAITING") {
             currentFloorElement.style.borderColor = "green";
         }
-        if (status === 'UPWARD' || status === 'DOWNWARD') {
-            setTimeout(() => {
-                currentFloorElement.style.borderColor = "transparent";
-            }, 600)
-        }
+        setTimeout(() => {
+            currentFloorElement.style.borderColor = "transparent";
+        }, 100)
     }
 
     const chooseFloor = async (elevatorId: string, floor: number) => {

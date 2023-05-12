@@ -16,7 +16,11 @@ function App() {
         addElevatorMutation.mutate()
     }
 
-    const updateElevatorsMutation = useMutation(runElevator)
+    const updateElevatorsMutation = useMutation(runElevator, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('elevators')
+        },
+    })
 
     const runElevators = (elevatorId: string) => {
         updateElevatorsMutation.mutate(elevatorId)
@@ -29,7 +33,7 @@ function App() {
     }
 
     const result = useQuery('elevators', getElevators,
-        {refetchInterval: 1000}
+        {refetchInterval: 500}
     )
 
     if (result.isLoading) {
