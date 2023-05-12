@@ -1,7 +1,8 @@
-
+## Dlaczego aplikacja webowa?
+Uzałem że w ten sposób będę mógł pokazać najlepiej swoje umiejętności gdyż mam chyba największą wiedzę jeśli chodzi o budowanie tego typu aplikacji, mimo iż dla tego typu zadania wydaje mi się że nie jest to najlepsza opcja.
 
 ## Działanie algorytmu
-algorytm wybiera najbliższe piętro w kierunku w którym porusza się winda(góra, dół), zatem najpierw wybierany jest kierunek windy w którym będzie się poruszać
+Algorytm wybiera najbliższe piętro w kierunku w którym porusza się winda(góra, dół), zatem najpierw wybierany jest kierunek windy w którym będzie się poruszać
 a dopiero potem wybierane jest najbliższe piętro. Nie można wybrać piętra na którym znajduje się aktualnie winda.
 
 * jeśli winda porusza się w górę to wybrane zostanie najbliższe piętro w tym kierunku mimo iż bliżej 
