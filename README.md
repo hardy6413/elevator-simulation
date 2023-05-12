@@ -40,7 +40,8 @@ Następnie otworzyć przeglądarke i udać się pod adres `http://localhost:3000
 Frontend wysyła zapytanie do backendu by dostać informacje o aktualnym stanie wind co 1 sekunde. 
 By zmiany stanu windy były widoczne dla użytkownika symulowane jest opóźnienie pomiędzy zmianą pięter, otwarciem drzwi czy zamknięciem drzwi. <br>
 Czas opóźnienia jest konfigurowalny co można zobaczyć w klasie ElevatorConfig. <br>
-Po stronie frontendowej założono że winda ma maksymalnie 16 pięter przy czym maksymalne piętro i minimalne można skonfigurować jedynie dla backendu.
+Po stronie frontendowej założono że winda ma maksymalnie 16 pięter przy czym maksymalne piętro i minimalne można skonfigurować jedynie dla backendu. <br>
+Ogólnie dla lepszej synchronizacji lepiej by opóźnienie nie było mniejsze niż dwie sekundy.
 
 ## Spostrzeżenia
 Wydaje mi się, że lepszym pomysłym było by zdefiniowanie modelu piętra i przypisanie go do windy, taki model przechowywałby informacje czy oczekuje az winda pojawi się na tym piętrze, dzięki temu
